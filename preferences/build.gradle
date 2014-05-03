@@ -1,0 +1,29 @@
+ext {
+  PROJECT_NAME = "preferences"
+  ARTIFACT_ID = "preferences"
+}
+
+apply plugin: 'android-library'
+apply from: file('../deploy.gradle')
+
+repositories {
+        mavenCentral()
+}
+
+android {
+  compileSdkVersion COMPILE_SDK_VERSION
+  buildToolsVersion BUILD_TOOLS_VERSION
+
+  defaultConfig {
+    minSdkVersion MIN_SDK_VERSION
+    targetSdkVersion TARGET_SDK_VERSION
+
+    versionCode VERSION_CODE
+    versionName VERSION
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+}
