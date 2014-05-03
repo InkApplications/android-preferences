@@ -1,11 +1,12 @@
 package com.inkapplications.preferences;
 
+import android.annotation.TargetApi;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import java.util.Set;
 
-import static android.content.SharedPreferences.Editor;
-
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class StringSetPreference extends AbsPreference<Set<String>> {
   public StringSetPreference(SharedPreferences preferences, String key) {
     this(preferences, key, null);
@@ -20,7 +21,6 @@ public class StringSetPreference extends AbsPreference<Set<String>> {
   }
 
   @Override public void set(Set<String> value) {
-    Editor editor = getPreferences().edit().putStringSet(getKey(), value);
-    PREF_SAVER.save(editor);
+    getPreferences().edit().putStringSet(getKey(), value).apply();
   }
 }

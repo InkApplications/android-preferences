@@ -28,6 +28,11 @@ public abstract class AbsPreference<T> implements Preference<T> {
     }
   }
 
+  /**
+   * Wrapper for saving the preference. Switches between
+   * {@link android.content.SharedPreferences.Editor#commit()}, and
+   * {@link android.content.SharedPreferences.Editor#apply()} based of of the api level
+   */
   protected static final PrefSaver PREF_SAVER;
   static {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
