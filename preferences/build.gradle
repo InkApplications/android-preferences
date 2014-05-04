@@ -4,10 +4,11 @@ ext {
 }
 
 apply plugin: 'android-library'
+apply plugin: 'android-test'
 apply from: file('../deploy.gradle')
 
 repositories {
-        mavenCentral()
+  mavenCentral()
 }
 
 android {
@@ -26,4 +27,16 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_7
     targetCompatibility JavaVersion.VERSION_1_7
   }
+
+  sourceSets {
+    androidTest {
+      setRoot('src/test')
+    }
+  }
+}
+
+dependencies {
+  androidTestCompile 'junit:junit:4.10'
+  androidTestCompile 'org.robolectric:robolectric:2.1.+'
+  androidTestCompile 'com.squareup:fest-android:1.0.+'
 }
