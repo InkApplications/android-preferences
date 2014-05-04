@@ -22,8 +22,7 @@ public class BooleanPreference extends AbsPreference<Boolean> {
   public void set(Boolean value) {
     if (value == null) throw new NullPointerException("value");
 
-    Editor editor = getPreferences().edit().putBoolean(getKey(), value);
-    PREF_SAVER.save(editor);
+    this.set((boolean) value);
   }
 
   public void set(boolean value) {

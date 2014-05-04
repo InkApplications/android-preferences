@@ -68,7 +68,7 @@ public abstract class AbsPreference<T> implements Preference<T> {
     return key;
   }
 
-  T getDefaultValue() {
+  protected T getDefaultValue() {
     return defaultValue;
   }
 }
