@@ -4,5 +4,7 @@
     <string name="app_name">sample</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="type_your_text">Type Your Text Here!</string>
+    <string name="first_run_text">Apps First Run!</string>
 
 </resources>
