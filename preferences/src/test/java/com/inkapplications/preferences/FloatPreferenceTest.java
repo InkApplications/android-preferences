@@ -12,7 +12,7 @@ import org.robolectric.RobolectricTestRunner;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-public class BooleanPreferenceTest {
+public class FloatPreferenceTest {
 
   SharedPreferences preferences;
 
@@ -23,30 +23,29 @@ public class BooleanPreferenceTest {
   }
 
   @Test
-  public void should_save_boolean_when_calling_set() {
+  public void should_save_float_when_calling_set() {
     // Arrange
-    boolean expected = true;
+    float expected = 10f;
     String key = "testKey";
-    BooleanPreference booleanPreference = new BooleanPreference(preferences, key);
-
+    FloatPreference preference = new FloatPreference(preferences, key);
 
     // Act
-    booleanPreference.set(expected);
+    preference.set(expected);
 
     // Assert
-    assertThat(preferences.getBoolean(key, false)).isTrue();
+    assertThat(preferences.getFloat(key, 0)).isEqualTo(expected);
   }
 
   @Test
   public void should_throw_exception_when_calling_set_with_null() {
     // Arrange
     String key = "testKey1";
-    BooleanPreference booleanPreference = new BooleanPreference(preferences, key);
+    FloatPreference preference = new FloatPreference(preferences, key);
 
 
     // Act
     try {
-      booleanPreference.set(null);
+      preference.set(null);
     } catch (NullPointerException e) {
       return;
     }
@@ -58,27 +57,27 @@ public class BooleanPreferenceTest {
   @Test
   public void should_get_value_when_calling_get() {
     // Arrange
-    boolean expected = false;
+    float expected = 2f;
     String key = "testKey2";
-    preferences.edit().putBoolean(key, expected).commit();
-    BooleanPreference booleanPreference = new BooleanPreference(preferences, key);
+    preferences.edit().putFloat(key, expected).commit();
+    FloatPreference preference = new FloatPreference(preferences, key);
 
     // Act
-    boolean result = booleanPreference.get();
+    float result = preference.get();
 
     // Assert
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(expected);
   }
 
   @Test
   public void should_return_true_when_isSet_is_called_and_value_is_set() {
     // Arrange
     String key = "testKey3";
-    preferences.edit().putBoolean(key, true).commit();
-    BooleanPreference booleanPreference = new BooleanPreference(preferences, key);
+    preferences.edit().putFloat(key, 1.5f).commit();
+    FloatPreference preference = new FloatPreference(preferences, key);
 
     // Act
-    boolean result = booleanPreference.isSet();
+    boolean result = preference.isSet();
 
     // Assert
     assertThat(result).isTrue();
@@ -88,10 +87,10 @@ public class BooleanPreferenceTest {
   public void should_return_false_when_isSet_is_called_and_value_is_not_set() {
     // Arrange
     String key = "testKey4";
-    BooleanPreference booleanPreference = new BooleanPreference(preferences, key);
+    FloatPreference preference = new FloatPreference(preferences, key);
 
     // Act
-    boolean result = booleanPreference.isSet();
+    boolean result = preference.isSet();
 
     // Assert
     assertThat(result).isFalse();
@@ -101,11 +100,11 @@ public class BooleanPreferenceTest {
   public void should_delete_preference() {
     // Arrange
     String key = "testKey5";
-    preferences.edit().putBoolean(key, true).commit();
-    BooleanPreference booleanPreference = new BooleanPreference(preferences, key);
+    preferences.edit().putFloat(key, 1).commit();
+    FloatPreference preference = new FloatPreference(preferences, key);
 
     // Act
-    booleanPreference.delete();
+    preference.delete();
 
     // Assert
     assertThat(preferences.contains(key)).isFalse();
