@@ -2,75 +2,75 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            if (IS_DEV_BUILD) {
-                mavenLocal()
-            } else {
-                mavenDeployer {
-                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+  uploadArchives {
+    repositories {
+      if (IS_DEV_BUILD) {
+        mavenLocal()
+      } else {
+        mavenDeployer {
+          beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                    repository(url: SONATYPE_URL) {
-                        authentication(userName: sonatypeUsername, password: sonatypePassword)
-                    }
+          repository(url: SONATYPE_URL) {
+            authentication(userName: sonatypeUsername, password: sonatypePassword)
+          }
 
-                    pom.project {
-                        name PROJECT_NAME
-                        packaging 'jar'
-                        description 'Better Preferences for Android'
-                        artifactId = ARTIFACT_ID
-                        groupId GROUP
-                        version VERSION
-                        url 'https://github.com/InkApplications/android-preferences'
+          pom.project {
+            name PROJECT_NAME
+            packaging 'jar'
+            description 'Better Preferences for Android'
+            artifactId = ARTIFACT_ID
+            groupId GROUP
+            version VERSION
+            url 'https://github.com/InkApplications/android-preferences'
 
-                        scm {
-                            url 'scm:https://github.com/InkApplications/android-preferences'
-                            connection 'scm:git@github.com:InkApplications/android-preferences.git'
-                            developerConnection 'scm:git@github.com:InkApplications/android-preferences.git'
-                        }
-
-                        licenses {
-                            license {
-                                name 'The Apache Software License, Version 2.0'
-                                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                                distribution 'repo'
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id 'areitz'
-                                name 'Andrew Reitz'
-                                url "http://andrewreitz.com"
-                            }
-                        }
-                    }
-                }
+            scm {
+              url 'scm:https://github.com/InkApplications/android-preferences'
+              connection 'scm:git@github.com:InkApplications/android-preferences.git'
+              developerConnection 'scm:git@github.com:InkApplications/android-preferences.git'
             }
+
+            licenses {
+              license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+              }
+            }
+
+            developers {
+              developer {
+                id 'areitz'
+                name 'Andrew Reitz'
+                url "http://andrewreitz.com"
+              }
+            }
+          }
         }
+      }
     }
+  }
 
-    signing {
-        required { IS_RELEASE_BUILD && gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
-    }
+  signing {
+    required { IS_RELEASE_BUILD && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+  }
 
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.allJava
-    }
+  task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.allJava
+  }
 
-    task androidJavadocsJar(type: Jar) {
-        classifier = 'javadoc'
-        from androidJavadocs.destinationDir
-    }
+  task androidJavadocsJar(type: Jar) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+  }
 
-    task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.allSource
-    }
+  task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.allSource
+  }
 
-    artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
-    }
+  artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+  }
 }

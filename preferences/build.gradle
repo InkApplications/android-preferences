@@ -1,6 +1,6 @@
 ext {
-  PROJECT_NAME = "preferences"
-  ARTIFACT_ID = "preferences"
+  PROJECT_NAME = "android-preferences"
+  ARTIFACT_ID = "android-preferences"
 }
 
 apply plugin: 'android-library'
