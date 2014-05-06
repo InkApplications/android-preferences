@@ -4,7 +4,7 @@ set -ex
 
 REPO="git@github.com:InkApplications/android-preferences.git"
 GROUP_ID="com.inkapplications"
-ARTIFACT_ID="preferences"
+ARTIFACT_ID="android-preferences"
 
 DIR=temp-clone
 
