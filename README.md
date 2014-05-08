@@ -12,7 +12,7 @@ application. This can best be done by using [Dagger[(https://github.com/square/d
 for an example) but can also be done with an overridden Application class (see [sample]
 (https://github.com/InkApplications/android-preferences/blob/master/preferences-sample/src/main/java/com/inkapplications/preferences/sample/SampleApplication.java)
 
-For more info see the sample and [JavaDocs](inkapplications.github.io/android-preferences)
+For more info see the sample and [JavaDocs](http://inkapplications.github.io/android-preferences/)
 
 
 ## Usage
