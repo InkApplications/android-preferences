@@ -10,7 +10,7 @@ It's best to set up a way to ensure only one instance of each preference will be
 application. This can best be done by using [Dagger[(https://github.com/square/dagger) (see
 [u2020](https://github.com/JakeWharton/u2020/blob/master/src/debug/java/com/jakewharton/u2020/data/DebugDataModule.java)
 for an example) but can also be done with an overridden Application class (see [sample]
-(https://github.com/InkApplications/android-preferences/blob/master/preferences-sample/src/main/java/com/inkapplications/preferences/sample/SampleApplication.java)
+(https://github.com/InkApplications/android-preferences/blob/master/preferences-sample/src/main/java/com/inkapplications/preferences/sample/SampleApplication.java))
 
 For more info see the sample and [JavaDocs](http://inkapplications.github.io/android-preferences/)
 
