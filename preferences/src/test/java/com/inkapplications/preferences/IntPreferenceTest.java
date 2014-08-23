@@ -28,7 +28,7 @@ import org.robolectric.annotation.Config;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@Config(emulateSdk=18)
+@Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class IntPreferenceTest {
 
@@ -41,7 +41,7 @@ public class IntPreferenceTest {
   }
 
   @Test
-  public void should_save_int_when_calling_set() {
+  public void saveInt() {
     // Arrange
     int expected = 5;
     String key = "testKey";
@@ -55,7 +55,7 @@ public class IntPreferenceTest {
   }
 
   @Test
-  public void should_throw_exception_when_calling_set_with_null() {
+  public void throwWhenSetWithNull() {
     // Arrange
     String key = "testKey1";
     IntPreference preference = new IntPreference(preferences, key);
@@ -73,7 +73,7 @@ public class IntPreferenceTest {
   }
 
   @Test
-  public void should_get_value_when_calling_get() {
+  public void getValue() {
     // Arrange
     int expected = 2;
     String key = "testKey2";
@@ -88,7 +88,7 @@ public class IntPreferenceTest {
   }
 
   @Test
-  public void should_return_true_when_isSet_is_called_and_value_is_set() {
+  public void isSetTrue() {
     // Arrange
     String key = "testKey3";
     preferences.edit().putInt(key, 1).commit();
@@ -102,7 +102,7 @@ public class IntPreferenceTest {
   }
 
   @Test
-  public void should_return_false_when_isSet_is_called_and_value_is_not_set() {
+  public void isSetFalse() {
     // Arrange
     String key = "testKey4";
     IntPreference preference = new IntPreference(preferences, key);
@@ -115,7 +115,7 @@ public class IntPreferenceTest {
   }
 
   @Test
-  public void should_delete_preference() {
+  public void deletePreference() {
     // Arrange
     String key = "testKey5";
     preferences.edit().putInt(key, 9).commit();

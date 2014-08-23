@@ -32,3 +32,6 @@ proguard/
 gradle.properties
 build/
 .gradle/
+
+#checkstyles
+checkstyles.cache

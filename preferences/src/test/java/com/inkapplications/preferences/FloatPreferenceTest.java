@@ -28,7 +28,7 @@ import org.robolectric.annotation.Config;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@Config(emulateSdk=18)
+@Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class FloatPreferenceTest {
 
@@ -41,7 +41,7 @@ public class FloatPreferenceTest {
   }
 
   @Test
-  public void should_save_float_when_calling_set() {
+  public void saveFloat() {
     // Arrange
     float expected = 10f;
     String key = "testKey";
@@ -55,7 +55,7 @@ public class FloatPreferenceTest {
   }
 
   @Test
-  public void should_throw_exception_when_calling_set_with_null() {
+  public void throwWhenSetWithNull() {
     // Arrange
     String key = "testKey1";
     FloatPreference preference = new FloatPreference(preferences, key);
@@ -73,7 +73,7 @@ public class FloatPreferenceTest {
   }
 
   @Test
-  public void should_get_value_when_calling_get() {
+  public void getValue() {
     // Arrange
     float expected = 2f;
     String key = "testKey2";
@@ -88,7 +88,7 @@ public class FloatPreferenceTest {
   }
 
   @Test
-  public void should_return_true_when_isSet_is_called_and_value_is_set() {
+  public void isSetTrue() {
     // Arrange
     String key = "testKey3";
     preferences.edit().putFloat(key, 1.5f).commit();
@@ -102,7 +102,7 @@ public class FloatPreferenceTest {
   }
 
   @Test
-  public void should_return_false_when_isSet_is_called_and_value_is_not_set() {
+  public void isSetFalse() {
     // Arrange
     String key = "testKey4";
     FloatPreference preference = new FloatPreference(preferences, key);
@@ -115,7 +115,7 @@ public class FloatPreferenceTest {
   }
 
   @Test
-  public void should_delete_preference() {
+  public void deletePreference() {
     // Arrange
     String key = "testKey5";
     preferences.edit().putFloat(key, 1).commit();

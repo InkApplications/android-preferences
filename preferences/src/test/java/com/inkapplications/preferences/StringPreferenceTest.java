@@ -28,7 +28,7 @@ import org.robolectric.annotation.Config;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@Config(emulateSdk=18)
+@Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class StringPreferenceTest {
 
@@ -41,7 +41,7 @@ public class StringPreferenceTest {
   }
 
   @Test
-  public void should_save_string_when_calling_set() {
+  public void saveString() {
     // Arrange
     String expected = "Test";
     String key = "testKey";
@@ -55,7 +55,7 @@ public class StringPreferenceTest {
   }
 
   @Test
-  public void should_not_throw_exception_when_calling_set_with_null() {
+  public void setWithNull() {
     // Arrange
     String key = "testKey1";
     StringPreference preference = new StringPreference(preferences, key);
@@ -69,7 +69,7 @@ public class StringPreferenceTest {
   }
 
   @Test
-  public void should_get_value_when_calling_get() {
+  public void getValue() {
     // Arrange
     String expected = "ೖ(⑅σ̑ᴗσ̑)ೖ";
     String key = "testKey2";
@@ -84,7 +84,7 @@ public class StringPreferenceTest {
   }
 
   @Test
-  public void should_return_true_when_isSet_is_called_and_value_is_set() {
+  public void isSetTrue() {
     // Arrange
     String key = "testKey3";
     preferences.edit().putString(key, "*⁂((✪⥎✪))⁂*").commit();
@@ -98,7 +98,7 @@ public class StringPreferenceTest {
   }
 
   @Test
-  public void should_return_false_when_isSet_is_called_and_value_is_not_set() {
+  public void isSetFalse() {
     // Arrange
     String key = "testKey4";
     StringPreference preference = new StringPreference(preferences, key);
@@ -111,7 +111,7 @@ public class StringPreferenceTest {
   }
 
   @Test
-  public void should_delete_preference() {
+  public void deletePreference() {
     // Arrange
     String key = "testKey5";
     preferences.edit().putString(key, "♥‿♥").commit();

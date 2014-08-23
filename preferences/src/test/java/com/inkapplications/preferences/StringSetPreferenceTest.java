@@ -16,8 +16,9 @@
 
 package com.inkapplications.preferences;
 
-import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 
 import org.junit.Before;
@@ -33,7 +34,8 @@ import java.util.Set;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@Config(emulateSdk=18)
+@Config(emulateSdk = 18)
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 @RunWith(RobolectricTestRunner.class)
 public class StringSetPreferenceTest {
 
@@ -46,7 +48,7 @@ public class StringSetPreferenceTest {
   }
 
   @Test
-  public void should_save_stringSet_when_calling_set() {
+  public void saveStringSet() {
     // Arrange
     Set<String> expected = new LinkedHashSet<>();
     expected.add("Test1");
@@ -63,7 +65,7 @@ public class StringSetPreferenceTest {
   }
 
   @Test
-  public void should_not_throw_exception_when_calling_set_with_null() {
+  public void setWithNull() {
     // Arrange
     String key = "testKey1";
     StringSetPreference preference = new StringSetPreference(preferences, key);
@@ -77,7 +79,7 @@ public class StringSetPreferenceTest {
   }
 
   @Test
-  public void should_get_value_when_calling_get() {
+  public void getValue() {
     // Arrange
     Set<String> expected = new LinkedHashSet<>();
     expected.add("Test1");
@@ -95,7 +97,7 @@ public class StringSetPreferenceTest {
   }
 
   @Test
-  public void should_return_true_when_isSet_is_called_and_value_is_set() {
+  public void isSetTrue() {
     // Arrange
     String key = "testKey3";
     preferences.edit().putStringSet(key, Collections.<String>emptySet()).commit();
@@ -109,7 +111,7 @@ public class StringSetPreferenceTest {
   }
 
   @Test
-  public void should_return_false_when_isSet_is_called_and_value_is_not_set() {
+  public void isSetFalse() {
     // Arrange
     String key = "testKey4";
     StringSetPreference preference = new StringSetPreference(preferences, key);
@@ -122,7 +124,7 @@ public class StringSetPreferenceTest {
   }
 
   @Test
-  public void should_delete_preference() {
+  public void deletePreference() {
     // Arrange
     Set<String> testSet = new LinkedHashSet<>();
     testSet.add("Test1");
