@@ -14,7 +14,7 @@
  * Limitations under the License.
  */
 
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
   compileSdkVersion COMPILE_SDK_VERSION

@@ -1,13 +1,13 @@
 int versionMajor = 1
 int versionMinor = 0
-int versionPatch = 0
+int versionPatch = 1
 int versionBuild = 0
 
 ext {
   MIN_SDK_VERSION = 4
   TARGET_SDK_VERSION = 19
   COMPILE_SDK_VERSION = 19
-  BUILD_TOOLS_VERSION = "19.0.3"
+  BUILD_TOOLS_VERSION = "19.1.0"
   GROUP = hasProperty("group") ? getProperty("group") : "com.inkapplications"
   VERSION = "${versionMajor}.${versionMinor}.${versionPatch}"
   VERSION_CODE = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
@@ -45,16 +45,15 @@ if (hasProperty("release")) {
 
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.9.+'
-    classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.9.+'
+    classpath 'com.android.tools.build:gradle:+'
   }
 }
 
 allprojects {
   repositories {
-    mavenCentral()
+    jcenter()
   }
 }
