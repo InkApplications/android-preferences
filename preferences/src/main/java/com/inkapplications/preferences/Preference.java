@@ -16,7 +16,7 @@
 
 package com.inkapplications.preferences;
 
-interface Preference<T> {
+public interface Preference<T> {
   /** Get the value the preference */
   T get();
 
