@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/InkApplications/android-preferences.svg?branch=master)](https://travis-ci.org/InkApplications/android-preferences)
 
-An easier way to use and consolidate preferense in your Android project. Based off of
+An easier way to use and consolidate preference in your Android project. Based off of
 [Jake Wharton](https://github.com/JakeWharton)'s preferences in
 [u2020](https://github.com/JakeWharton/u2020)
 
