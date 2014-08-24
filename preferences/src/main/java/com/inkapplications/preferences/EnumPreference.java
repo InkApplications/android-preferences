@@ -38,7 +38,7 @@ public class EnumPreference<E extends Enum<E>> extends AbsPreference<E> {
    * @param preferences  SharedPreferences that this class will write to.
    * @param key          The key/name to refer to this preference as.
    * @param defaultValue The value to return if {@link #get()} is called and this
-   *                     preference {@link #set(E)} method has not been called.
+   *                     preference {@link #set(Enum)} method has not been called.
    */
   public EnumPreference(SharedPreferences preferences, String key, E defaultValue) {
     super(preferences, key, defaultValue);
