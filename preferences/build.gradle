@@ -14,11 +14,6 @@
  * Limitations under the License.
  */
 
-ext {
-  PROJECT_NAME = "android-preferences"
-  ARTIFACT_ID = "android-preferences"
-}
-
 buildscript {
   repositories {
     jcenter()
@@ -29,6 +24,8 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'robolectric'
+apply from: '../gradle/deploy.gradle'
 
 repositories {
   jcenter()
@@ -66,8 +63,6 @@ dependencies {
   }
   androidTestCompile 'com.squareup:fest-android:1.0.+'
 }
-
-apply plugin: 'robolectric'
 
 robolectric {
   include '**/*Test.class'
