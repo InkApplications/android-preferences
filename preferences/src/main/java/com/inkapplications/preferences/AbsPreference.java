@@ -16,6 +16,7 @@
 
 package com.inkapplications.preferences;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -94,6 +95,7 @@ public abstract class AbsPreference<T> implements Preference<T> {
   }
 
   /** {@inheritDoc} */
+  @SuppressLint("CommitPrefEdits")
   @Override public void delete() {
     Editor editor = getPreferences().edit().remove(key);
     PREF_SAVER.save(editor);
