@@ -16,6 +16,7 @@
 
 package com.inkapplications.preferences;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 
 import static android.content.SharedPreferences.Editor;
@@ -57,6 +58,7 @@ public class FloatPreference extends AbsPreference<Float> {
   }
 
   /** Set the value for the preference */
+  @SuppressLint("CommitPrefEdits")
   public void set(float value) {
     // Method created in an attempt to avoid unnecessary autoboxing
     Editor editor = getPreferences().edit().putFloat(getKey(), value);

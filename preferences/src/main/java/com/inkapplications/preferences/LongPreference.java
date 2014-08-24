@@ -16,6 +16,7 @@
 
 package com.inkapplications.preferences;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 
 import static android.content.SharedPreferences.Editor;
@@ -57,6 +58,7 @@ public class LongPreference extends AbsPreference<Long> {
   }
 
   /** Set the value for the preference */
+  @SuppressLint("CommitPrefEdits")
   public void set(long value) {
     Editor editor = getPreferences().edit().putLong(getKey(), value);
     PREF_SAVER.save(editor);

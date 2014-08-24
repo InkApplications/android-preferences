@@ -16,6 +16,7 @@
 
 package com.inkapplications.preferences;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 
 import static android.content.SharedPreferences.Editor;
@@ -51,6 +52,7 @@ public class StringPreference extends AbsPreference<String> {
   }
 
   /** Set the value for the preference */
+  @SuppressLint("CommitPrefEdits")
   @Override public void set(String value) {
     Editor editor = getPreferences().edit().putString(getKey(), value);
     PREF_SAVER.save(editor);

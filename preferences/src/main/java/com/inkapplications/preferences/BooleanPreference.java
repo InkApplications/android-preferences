@@ -16,6 +16,7 @@
 
 package com.inkapplications.preferences;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 
 import static android.content.SharedPreferences.Editor;
@@ -57,6 +58,7 @@ public class BooleanPreference extends AbsPreference<Boolean> {
   }
 
   /** Set the value for the preference */
+  @SuppressLint("CommitPrefEdits")
   public void set(boolean value) {
     // Method created in an attempt to avoid unnecessary autoboxing
     Editor editor = getPreferences().edit().putBoolean(getKey(), value);
