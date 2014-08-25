@@ -20,12 +20,14 @@ buildscript {
   }
   dependencies {
     classpath 'org.robolectric:robolectric-gradle-plugin:+'
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5'
   }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'robolectric'
-apply from: '../gradle/deploy.gradle'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 
 repositories {
   jcenter()
@@ -66,4 +68,86 @@ dependencies {
 
 robolectric {
   include '**/*Test.class'
+}
+
+task androidJavadocs(type: Javadoc) {
+  source = android.sourceSets.main.java.srcDirs
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+  from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+}
+
+def pomConfig = {
+  name 'android-preferences'
+  description 'An easier way to use and consolidate preference in your Android project.'
+  url 'https://github.com/InkApplications/android-preferences'
+  scm {
+    url 'scm:https://github.com/InkApplications/android-preferences'
+    connection 'scm:git@github.com:InkApplications/android-preferences.git'
+    developerConnection 'scm:git@github.com:InkApplications/android-preferences.git'
+  }
+  licenses {
+    license {
+      name 'The Apache Software License, Version 2.0'
+      url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+      distribution 'repo'
+    }
+  }
+
+  developers {
+    developer {
+      id 'areitz'
+      name 'Andrew Reitz'
+      url "http://andrewreitz.com"
+    }
+  }
+}
+
+publishing {
+  publications {
+    dist(MavenPublication) {
+      groupId GROUP
+      artifactId 'android-preferences'
+      version VERSION
+      artifact "build/outputs/aar/preferences-${VERSION}.aar"
+      artifact androidJavadocsJar {
+        classifier 'source'
+      }
+      artifact androidSourcesJar {
+        classifier 'javadoc'
+      }
+      pom.withXml {
+        Node node = asNode()
+        node.children().last() + pomConfig
+      }
+    }
+  }
+}
+
+bintray {
+  user = BINTRAY_USER
+  key = BINTRAY_APIKEY
+
+  publications = ['dist']
+
+  dryRun = false
+  publish = true
+  pkg {
+    repo = 'android'
+    name = 'android-preferences'
+    userOrg = 'inkapplications'
+    desc = 'An easier way to use and consolidate preference in your Android project.'
+    websiteUrl = 'https://github.com/InkApplications/android-preferences'
+    issueTrackerUrl = 'https://github.com/InkApplications/android-preferences/issues'
+    vcsUrl = 'https://github.com/InkApplications/android-preferences.git'
+    licenses = ['Apache-2.0']
+    labels = ['Android', 'SharedPreferences']
+    publicDownloadNumbers = true
+  }
 }
