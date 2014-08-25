@@ -17,7 +17,7 @@ For more info see the sample and [JavaDocs](http://inkapplications.github.io/and
 
 ## Usage
 
-`compile 'com.inkapplications:android-preferences:1.0.+'`
+`compile 'com.inkapplications:android-preferences:1.1.+'`
 
 
 ## License

@@ -21,6 +21,8 @@ buildscript {
   dependencies {
     classpath 'org.robolectric:robolectric-gradle-plugin:+'
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5'
+    classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:2.2.5'
+    classpath "org._10ne.gradle:rest-gradle-plugin:0.3.1"
   }
 }
 
@@ -28,6 +30,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'robolectric'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
+apply plugin: "org.10ne.rest"
+apply plugin: 'artifactory-publish'
 
 repositories {
   jcenter()
@@ -83,32 +87,6 @@ task androidSourcesJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
 }
 
-def pomConfig = {
-  name 'android-preferences'
-  description 'An easier way to use and consolidate preference in your Android project.'
-  url 'https://github.com/InkApplications/android-preferences'
-  scm {
-    url 'scm:https://github.com/InkApplications/android-preferences'
-    connection 'scm:git@github.com:InkApplications/android-preferences.git'
-    developerConnection 'scm:git@github.com:InkApplications/android-preferences.git'
-  }
-  licenses {
-    license {
-      name 'The Apache Software License, Version 2.0'
-      url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-      distribution 'repo'
-    }
-  }
-
-  developers {
-    developer {
-      id 'areitz'
-      name 'Andrew Reitz'
-      url "http://andrewreitz.com"
-    }
-  }
-}
-
 publishing {
   publications {
     dist(MavenPublication) {
@@ -123,8 +101,29 @@ publishing {
         classifier 'javadoc'
       }
       pom.withXml {
-        Node node = asNode()
-        node.children().last() + pomConfig
+        Node root = asNode()
+        root.appendNode('name', 'android-preferences')
+        root.appendNode('description', 'An easier way to use and consolidate preference in your Android project.')
+        root.appendNode('url', 'https://github.com/InkApplications/android-preferences')
+
+        def issues = root.appendNode('issueManagement')
+        issues.appendNode('system', 'github')
+        issues.appendNode('url', 'https://github.com/InkApplications/android-preferences/issues')
+
+        def scm = root.appendNode('scm')
+        scm.appendNode('url', 'scm:https://github.com/InkApplications/android-preferences')
+        scm.appendNode('connection', 'scm:git@github.com:InkApplications/android-preferences.git')
+        scm.appendNode('developerConnection', 'scm:git@github.com:InkApplications/android-preferences.git')
+
+        def license = root.appendNode('licenses').appendNode('license')
+        license.appendNode('name', 'The Apache Software License, Version 2.0')
+        license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
+        license.appendNode('distribution', 'repo')
+
+        def dev = root.appendNode('developers').appendNode('developer')
+        dev.appendNode('id', 'areitz')
+        dev.appendNode('name', 'Andrew Reitz')
+        dev.appendNode('url', "http://andrewreitz.com")
       }
     }
   }
@@ -149,5 +148,35 @@ bintray {
     licenses = ['Apache-2.0']
     labels = ['Android', 'SharedPreferences']
     publicDownloadNumbers = true
+  }
+}
+
+task bintraySign(type: org._10ne.gradle.rest.RestTask) {
+  httpMethod = 'post'
+  uri = "https://api.bintray.com/gpg/inkapplications/android/android-preferences/versions/${VERSION}"
+  username = BINTRAY_USER
+  password = BINTRAY_APIKEY
+  requestBody = [passphrase: SIGNING_PASSWORD]
+  contentType = groovyx.net.http.ContentType.JSON
+}
+
+artifactory {
+  contextUrl = 'http://oss.jfrog.org/artifactory'
+  publish {
+    contextUrl = 'http://oss.jfrog.org/artifactory'
+    repository {
+      repoKey = 'oss-snapshot-local'
+      username = BINTRAY_USER
+      password = BINTRAY_APIKEY
+    }
+    defaults {
+      publications('dist')
+    }
+  }
+  resolve {
+    contextUrl = 'http://oss.jfrog.org/artifactory'
+    repository {
+      repoKey = 'libs-release'
+    }
   }
 }

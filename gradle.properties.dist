@@ -1,2 +1,4 @@
 BINTRAY_USER=username
 BINTRAY_APIKEY=apkikeyhere
+
+SIGNING_PASSWORD=passwordhere

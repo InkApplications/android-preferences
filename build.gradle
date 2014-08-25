@@ -9,7 +9,7 @@ ext {
   COMPILE_SDK_VERSION = 19
   BUILD_TOOLS_VERSION = "19.1.0"
   GROUP = hasProperty("group") ? getProperty("group") : "com.inkapplications"
-  VERSION = "${versionMajor}.${versionMinor}.${versionPatch}"
+  VERSION = "${versionMajor}.${versionMinor}.${versionPatch}-SNAPSHOT"
   VERSION_CODE = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
 }
 
